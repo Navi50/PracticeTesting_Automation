@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-public class LoginTestNG_Demo {
+public class loginTestNGDemo {
 
     WebDriver driver;
 
@@ -23,8 +23,8 @@ public class LoginTestNG_Demo {
     @AfterClass
     public void afterclass() {
         System.out.println("After Class");
-//		driver.close();
-//		driver.quit();
+		driver.close();
+		driver.quit();
     }
 
     @BeforeSuite
