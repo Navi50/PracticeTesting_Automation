@@ -1,38 +1,39 @@
 package org.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+public class AppTest {
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+    public static void main(String[] args) {
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+
+        Map<String,String> locators = new HashMap();
+        locators.put("username","user-name");
+        locators.put("password","password");
+
+        driver.manage().window().maximize();
+        driver.get("https://www.saucedemo.com/v1/");
+
+        WebElement username = driver.findElement(By.id(locators.get("username")));
+        WebElement password = driver.findElement(By.id(locators.get("password")));
+
+        username.sendKeys("standard_user");
+        password.sendKeys("secret_sauce");
+
+        driver.findElement(By.id("login-button")).click();
     }
 }
