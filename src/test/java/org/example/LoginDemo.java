@@ -22,7 +22,6 @@ public class LoginDemo {
         passwordElement.sendKeys("secret_sauce");
 
         driver.findElement(By.id("login-button")).click();
-
         Thread.sleep(2000);
 
         WebElement verifyTitle = driver.findElement(By.className("product_label"));
