@@ -5,11 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import utils.DriverManager;
 
 import java.util.concurrent.TimeUnit;
 
 public class SwagLabs_Login_Steps {
-    WebDriver driver = new ChromeDriver();
+
+    private final WebDriver driver = DriverManager.getDriver();
     @Given("Open the login page")
     public void open_the_login_page() {
         driver.get("https://www.saucedemo.com/v1/");
