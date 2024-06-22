@@ -1,7 +1,12 @@
 package pages;
 
+import org.json.simple.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.CommonUtils;
+import utils.DriverManager;
 
 public class SwagLoginPage {
 
@@ -9,6 +14,15 @@ public class SwagLoginPage {
 
     private SwagLoginPage(){
 
+    }
+    WebDriver driver = DriverManager.getDriver();
+
+    JSONObject locators = CommonUtils.getLocators();
+    JSONObject loginPage;
+
+    {
+        assert locators != null;
+        loginPage = (JSONObject) locators.get("Loginpage");
     }
 
     public static SwagLoginPage getInstance(){
@@ -19,8 +33,8 @@ public class SwagLoginPage {
     }
 
 
-    @FindBy(name = "user-name")
-    public WebElement username;
+//    @FindBy(name = "user-name")
+//    public WebElement username;
 
     @FindBy(id = "password")
     public WebElement password;
@@ -29,6 +43,7 @@ public class SwagLoginPage {
     public WebElement login;
 
     public void enterUsername(){
+        WebElement username = driver.findElement(By.name((String) loginPage.get("username")));
         username.clear();
         username.sendKeys("standard_user");
     }
