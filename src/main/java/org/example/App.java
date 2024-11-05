@@ -18,19 +18,28 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println(getLocators("Loginpage").get("login"));
+        System.out.println(getLocators("Loginpage","name").get("login"));
 
 
     }
 
-    public static Map<String, String> getLocators(String page){
+    public static Map<String, String> getLocators(String page,String eleType){
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         try{
-            File jsonFile = new File("src/test/resources/Locators.json");
+            File jsonFile = new File("src/test/resources/Locator.json");
             Map<String, Object> dataMap = objectMapper.readValue(jsonFile, Map.class);
-            Map<String, Object> data = (Map<String, Object>) dataMap.get(page);
+            System.out.println("Datamap");
+            System.out.println(dataMap);
+            Map<String, Object> datapage = (Map<String, Object>) dataMap.get(page);
+            System.out.println("Datapage");
+            System.out.println(datapage);
+            Map<String, Object> data = (Map<String, Object>) datapage.get(eleType);
+            System.out.println("Data");
+            System.out.println(data);
+
+
 
             Map<String, String> locator = new HashMap<>();
 

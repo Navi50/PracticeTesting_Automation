@@ -1,13 +1,11 @@
 package utils;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+
 import org.openqa.selenium.support.PageFactory;
 import pages.SwagLoginPage;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,26 +33,15 @@ public class CommonUtils {
     }
 
 
-    public static JSONObject getLocators() {
-        JSONParser parser = new JSONParser();
-        try {
-            FileReader reader = new FileReader("src/test/resources/Locators.json");
-            return (JSONObject) parser.parse(reader);
-        } catch (
-                Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static Map<String, String> getLocators(String page){
+    public static Map<String, String> getLocators(String page, String eleType){
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         try{
-            File jsonFile = new File("src/test/resources/Locators.json");
+            File jsonFile = new File("src/test/resources/Locator.json");
             Map<String, Object> dataMap = objectMapper.readValue(jsonFile, Map.class);
-            Map<String, Object> data = (Map<String, Object>) dataMap.get(page);
+            Map<String, Object> datapage = (Map<String, Object>) dataMap.get(page);
+            Map<String, Object> data = (Map<String, Object>) datapage.get(eleType);
 
             Map<String, String> locator = new HashMap<>();
 

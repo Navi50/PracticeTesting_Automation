@@ -24,24 +24,43 @@ public class SwagLoginPage {
     }
 
     WebDriver driver = DriverManager.getDriver();
-    Map<String, String> loginLocators = CommonUtils.getLocators("Loginpage");
 
 
+    public WebElement getElement(String eleType, String element){
+        WebElement locator =null;
+        Map<String, String> loginLocators;
+        switch (eleType){
+            case "name":
+                loginLocators = CommonUtils.getLocators("Loginpage","name");
+                locator = driver.findElement(By.name(loginLocators.get(element)));
+                break;
+            case "id":
+                loginLocators = CommonUtils.getLocators("Loginpage","id");
+                locator = driver.findElement(By.id(loginLocators.get(element)));
+                break;
+            case "xpath":
+                loginLocators = CommonUtils.getLocators("Loginpage","xpath");
+                locator = driver.findElement(By.xpath(loginLocators.get(element)));
+                break;
+        }
+
+        return locator;
+    }
 
     public void enterUsername(){
-        WebElement username = driver.findElement(By.name(loginLocators.get("username")));
+        WebElement username = getElement("name","username");
         username.clear();
         username.sendKeys("standard_user");
     }
 
     public void enterPassword(){
-        WebElement password = driver.findElement(By.name(loginLocators.get("password")));
+        WebElement password = getElement("name","password");
         password.clear();
         password.sendKeys("secret_sauce");
     }
 
     public void clickLogin(){
-        WebElement login = driver.findElement(By.id(loginLocators.get("login")));
+        WebElement login = getElement("id","login");
         login.click();
     }
 }
