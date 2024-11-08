@@ -1,0 +1,11 @@
+{
+  "Loginpage": {
+    "name": {
+    "username": "user-name",
+    "password": "password"
+    },
+    "id": {
+    "login": "login-button"
+    }
+  }
+}
