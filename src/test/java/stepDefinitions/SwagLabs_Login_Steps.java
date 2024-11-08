@@ -42,8 +42,6 @@ public class SwagLabs_Login_Steps {
         WebElement verifyTitle = DriverManager.getDriver().findElement(By.className("product_label"));
         verifyTitle.isDisplayed();
         System.out.println("Title is verified");
-
-        DriverManager.quitDriver();
     }
 
 }

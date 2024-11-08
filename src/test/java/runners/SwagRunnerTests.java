@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features/SWAGLABS.feature",
         glue = {"stepDefinitions"},
-        plugin = {"pretty", "html:target/cucumber-reports.html"}
+        plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:","pretty", "html:target/cucumber-reports.html"}
 )
 
 public class SwagRunnerTests {
