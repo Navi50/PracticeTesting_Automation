@@ -2,11 +2,16 @@ package utils;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.SwagLoginPage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -32,8 +37,24 @@ public class CommonUtils {
         PageFactory.initElements(DriverManager.getDriver(), SwagLoginPage.getInstance());
     }
 
+    public static void waitForElement(String waitFor, WebElement element){
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
 
-    public static Map<String, String> getLocators(String page, String eleType){
+        switch (waitFor){
+            case "clickable":
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                break;
+            case "visible":
+                wait.until(ExpectedConditions.visibilityOf(element));
+                break;
+            default:
+                wait.until(ExpectedConditions.visibilityOf(element));
+                break;
+
+        }
+    }
+
+    public static Map<String, String> getLocators(String page, String eleType, String waitFor){
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -48,7 +69,6 @@ public class CommonUtils {
             for(Map.Entry<String, Object> entry : data.entrySet()){
                 locator.put(entry.getKey(), entry.getValue().toString());
             }
-
             return locator;
 
         }catch(Exception e){
@@ -56,4 +76,6 @@ public class CommonUtils {
             return null;
         }
     }
+
+
 }
