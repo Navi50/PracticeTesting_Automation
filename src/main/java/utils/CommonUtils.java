@@ -54,13 +54,13 @@ public class CommonUtils {
         }
     }
 
-    public static Map<String, String> getLocators(String page, String eleType, String waitFor){
+    public static Map<String, String> getLocators(String page, String eleType){
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         try{
             File jsonFile = new File("src/test/resources/Locator.json");
-            Map<String, Object> dataMap = objectMapper.readValue(jsonFile, Map.class);
+            Map dataMap = objectMapper.readValue(jsonFile, Map.class);
             Map<String, Object> datapage = (Map<String, Object>) dataMap.get(page);
             Map<String, Object> data = (Map<String, Object>) datapage.get(eleType);
 

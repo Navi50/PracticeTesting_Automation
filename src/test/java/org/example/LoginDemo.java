@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -11,9 +12,9 @@ public class LoginDemo {
 
     public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/v1/");
+        driver.navigate().to("https://www.saucedemo.com/v1/");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         System.out.println(driver.getTitle());
 
         driver.findElement(By.name("user-name")).sendKeys("standard_user");
@@ -27,6 +28,9 @@ public class LoginDemo {
         WebElement verifyTitle = driver.findElement(By.className("product_label"));
         verifyTitle.isDisplayed();
         System.out.println("Title is verified");
+
+        driver.navigate().back();
+        driver.navigate().forward();
 
         driver.close();
         driver.quit();
