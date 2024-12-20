@@ -65,7 +65,7 @@ public class CommonUtils {
             Map<String, Object> data = (Map<String, Object>) datapage.get(eleType);
 
             Map<String, String> locator = new HashMap<>();
-            -;
+            -
 
             for(Map.Entry<String, Object> entry : data.entrySet()){
                 locator.put(entry.getKey(), entry.getValue().toString());
