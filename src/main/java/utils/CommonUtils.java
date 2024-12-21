@@ -3,6 +3,7 @@ package utils;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 
 public class CommonUtils {
@@ -37,22 +39,6 @@ public class CommonUtils {
         PageFactory.initElements(DriverManager.getDriver(), SwagLoginPage.getInstance());
     }
 
-    public static void waitForElement(String waitFor, WebElement element){
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
-
-        switch (waitFor){
-            case "clickable":
-                wait.until(ExpectedConditions.elementToBeClickable(element));
-                break;
-            case "visible":
-                wait.until(ExpectedConditions.visibilityOf(element));
-                break;
-            default:
-                wait.until(ExpectedConditions.visibilityOf(element));
-                break;
-
-        }
-    }
 
     public static Map<String, String> getLocators(String page, String eleType){
 
@@ -64,18 +50,62 @@ public class CommonUtils {
             Map<String, Object> datapage = (Map<String, Object>) dataMap.get(page);
             Map<String, Object> data = (Map<String, Object>) datapage.get(eleType);
 
-            Map<String, String> locator = new HashMap<>();
-            -
+            Map<String, String> locators = new HashMap<>();
+
 
             for(Map.Entry<String, Object> entry : data.entrySet()){
-                locator.put(entry.getKey(), entry.getValue().toString());
+                locators.put(entry.getKey(), entry.getValue().toString());
             }
-            return locator;
+            return locators;
 
         }catch(Exception e){
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static WebElement getElement(String page, String eleType, String element, String waitFor){
+        WebDriver driver = DriverManager.getDriver();
+        WebElement locator =null;
+        Map<String, String> loginLocators;
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+
+        switch (waitFor){
+            case "clickable":
+                if (Objects.equals(eleType, "name")){
+                    loginLocators = getLocators(page,"name");
+                    locator = driver.findElement(By.name(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+                } else if (Objects.equals(eleType,"id")) {
+                    loginLocators = getLocators("Loginpage","id");
+                    locator = driver.findElement(By.id(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+                } else if (Objects.equals(eleType,"xpath")) {
+                    loginLocators = getLocators("Loginpage","xpath");
+                    locator = driver.findElement(By.xpath(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.elementToBeClickable(locator));
+                }
+                break;
+            case "visible":
+                if (Objects.equals(eleType, "name")){
+                    loginLocators = getLocators(page,"name");
+                    locator = driver.findElement(By.name(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.visibilityOf(locator));
+                } else if (Objects.equals(eleType,"id")) {
+                    loginLocators = getLocators("Loginpage","id");
+                    locator = driver.findElement(By.id(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.visibilityOf(locator));
+                } else if (Objects.equals(eleType,"xpath")) {
+                    loginLocators = getLocators("Loginpage","xpath");
+                    locator = driver.findElement(By.xpath(loginLocators.get(element)));
+                    wait.until(ExpectedConditions.visibilityOf(locator));
+                }
+                break;
+
+        }
+        return locator;
     }
 
 

@@ -9,12 +9,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import utils.CommonUtils;
 import utils.DriverManager;
+import utils.ExtentReports1;
 
 import java.io.IOException;
 
 public class Common_Step_Definition {
 
     public WebDriver driver;
+    ExtentReports1 extentReports = new ExtentReports1();
 
     @Before
     public void beforeScenario() throws IOException {
@@ -25,6 +27,8 @@ public class Common_Step_Definition {
                 DriverManager.launchDriver();
                 commonUtils.iniWebElements();
             }
+            extentReports.extentreportStart();
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -43,5 +47,6 @@ public class Common_Step_Definition {
     @After
     public void afterall(){
         DriverManager.quitDriver();
+        extentReports.extentReportStop();
     }
 }
