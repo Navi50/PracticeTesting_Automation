@@ -18,6 +18,8 @@
 
         <!-- report name - displayed at top-nav -->
         <reportName>Automation Report</reportName>
+        <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+
 
         <!-- location of charts in the test view -->
         <!-- top, bottom -->

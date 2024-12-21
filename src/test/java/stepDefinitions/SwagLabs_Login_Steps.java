@@ -1,20 +1,21 @@
 package stepDefinitions;
 
-import io.cucumber.java.Before;
+
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.SwagLoginPage;
 import utils.DriverManager;
+
+import java.io.IOException;
 
 
 public class SwagLabs_Login_Steps {
 
 
-
     @Given("Open the login page")
-    public void open_the_login_page() {
+    public void open_the_login_page() throws IOException {
+
 
     }
 

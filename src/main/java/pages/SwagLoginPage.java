@@ -1,12 +1,8 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.CommonUtils;
-import utils.DriverManager;
 
-import java.util.Map;
 
 public class SwagLoginPage {
 
@@ -22,49 +18,22 @@ public class SwagLoginPage {
         }
         return swagLoginPage;
     }
-
-    WebDriver driver = DriverManager.getDriver();
-
-
-    public WebElement getElement(String eleType, String element){
-        WebElement locator =null;
-        Map<String, String> loginLocators = null;
-        switch (eleType){
-            case "name":
-                loginLocators = CommonUtils.getLocators("Loginpage","name");
-
-                locator = driver.findElement(By.name(loginLocators.get(element)));
-                break;
-            case "id":
-                loginLocators = CommonUtils.getLocators("Loginpage","id");
-                locator = driver.findElement(By.id(loginLocators.get(element)));
-                break;
-            case "xpath":
-                loginLocators = CommonUtils.getLocators("Loginpage","xpath");
-                locator = driver.findElement(By.xpath(loginLocators.get(element)));
-                break;
-        }
-
-        return locator;
-    }
+    static String page = "Loginpage";
 
     public void enterUsername(){
-        WebElement username = getElement("name","username");
-        CommonUtils.waitForElement("visible",username);
+        WebElement username = CommonUtils.getElement(page,"name","username","visible");
         username.clear();
         username.sendKeys("standard_user");
     }
 
     public void enterPassword(){
-        WebElement password = getElement("name","password");
-        CommonUtils.waitForElement("visible",password);
+        WebElement password = CommonUtils.getElement(page,"name","password","visible");
         password.clear();
         password.sendKeys("secret_sauce");
     }
 
     public void clickLogin(){
-        WebElement login = getElement("id","login");
-        CommonUtils.waitForElement("clickable ",login);
+        WebElement login = CommonUtils.getElement(page,"id","login","clickable");
         login.click();
     }
 }
