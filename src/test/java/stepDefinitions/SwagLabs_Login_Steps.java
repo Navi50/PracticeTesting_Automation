@@ -16,7 +16,6 @@ public class SwagLabs_Login_Steps {
     @Given("Open the login page")
     public void open_the_login_page() throws IOException {
 
-
     }
 
     @When("User enter the Username")
