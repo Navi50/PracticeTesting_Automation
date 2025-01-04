@@ -2,9 +2,9 @@ package utils;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.cucumber.java.AfterStep;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,13 +12,18 @@ import pages.SwagLoginPage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
 public class CommonUtils {
+
+
 
     public void loadProperties() throws IOException {
 
@@ -32,6 +37,7 @@ public class CommonUtils {
 
         Constants.BROWSER = properties.getProperty("BROWSER");
         Constants.URL = properties.getProperty("URL");
+        Constants.APPLICATION = properties.getProperty("APPLICATION");
 
     }
 
@@ -66,6 +72,7 @@ public class CommonUtils {
 
     public static WebElement getElement(String page, String eleType, String element, String waitFor){
         WebDriver driver = DriverManager.getDriver();
+
         WebElement locator =null;
         Map<String, String> loginLocators;
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
@@ -107,6 +114,7 @@ public class CommonUtils {
         }
         return locator;
     }
+
 
 
 }

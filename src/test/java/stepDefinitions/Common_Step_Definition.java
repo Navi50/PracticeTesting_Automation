@@ -30,17 +30,17 @@ public class Common_Step_Definition {
 
 
 
-    @AfterStep
-    public void afterStep(Scenario scenario){
-        byte[] screenshotTaken = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
-        if(scenario.isFailed()){
-            scenario.attach(screenshotTaken,"image/png","Error Screen");
-        }else {
-            scenario.attach(screenshotTaken,"image/png","Screen after the step");
-        }
+//    @AfterStep
+//    public void afterStep(Scenario scenario) throws IOException {
+//        byte[] screenshotTaken = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+//        if(scenario.isFailed()){
+//            scenario.attach(screenshotTaken,"image/png","Error Screen");
+//        }else {
+//            scenario.attach(screenshotTaken,"image/png","Screen after the step");
+//        }
+//    }
 
 
-    }
 
     @After
     public void afterall(Scenario scenario){
