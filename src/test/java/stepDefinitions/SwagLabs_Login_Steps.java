@@ -4,7 +4,9 @@ package stepDefinitions;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import pages.SwagLoginPage;
+import org.testng.Assert;
+import pages.SharedState;
+import pages.SwagLabsPage;
 import utils.DriverManager;
 import utils.ExtentReportsUtil;
 
@@ -13,6 +15,11 @@ import java.io.IOException;
 
 public class SwagLabs_Login_Steps {
 
+    private final SharedState sharedState;
+
+    public SwagLabs_Login_Steps(SharedState sharedState){
+        this.sharedState = sharedState;
+    }
 
     @Given("Open the login page")
     public void open_the_login_page() throws IOException {
@@ -21,10 +28,10 @@ public class SwagLabs_Login_Steps {
 
     @When("User enter the Username and Password")
     public void user_enter_the_username_and_password() throws InterruptedException {
-        SwagLoginPage.getInstance().enterUsername();
+        SwagLabsPage.getInstance().enterText("username","name","standard_user");
         ExtentReportsUtil.addLog("\n"+" User enter the Username - Successful"+"\n");
 
-        SwagLoginPage.getInstance().enterPassword();
+        SwagLabsPage.getInstance().enterText("password","name","secret_sauce");
         ExtentReportsUtil.addLog("\n"+" User enter the Password - Successful"+"\n");
 
         Thread.sleep(2000);
@@ -32,7 +39,7 @@ public class SwagLabs_Login_Steps {
 
     @When("User click on the Login")
     public void user_click_on_the_login() throws InterruptedException {
-        SwagLoginPage.getInstance().clickLogin();
+        SwagLabsPage.getInstance().clickElement("login","id");
         Thread.sleep(2000);
         ExtentReportsUtil.addLog("\n"+" User click on Login - Successful"+"\n");
     }
@@ -49,15 +56,76 @@ public class SwagLabs_Login_Steps {
 
     @When("User changed sort option to (.+)$")
     public void userChangedSortOptionTo(String sortOption) throws InterruptedException {
-        SwagLoginPage.getInstance().changeSort(sortOption);
+        SwagLabsPage.getInstance().changeSort(sortOption);
         Thread.sleep(1000);
     }
 
     @Then("User click on first product")
     public void user_click_on_first_product() {
-       SwagLoginPage.getInstance().clickOnFirstItem();
+        String title = SwagLabsPage.getInstance().getElementText("item1Name","xpath");
+        SwagLabsPage.getInstance().clickElement("item1","xpath");
+
+        sharedState.setSharedData(title);
     }
 
 
+    @And("User Verify the Item name")
+    public void userVerifyTheItemName() {
+        String title = SwagLabsPage.getInstance().getElementText("itemName","xpath");
+        String validate = sharedState.getSharedData();
 
+        Assert.assertEquals(title,validate);
+    }
+
+    @When("User click on Add to Cart")
+    public void userClickOnAddToCart() {
+        SwagLabsPage.getInstance().clickElement("addToCard","xpath");
+    }
+
+    @Then("User Verify Item added in Cart")
+    public void userVerifyItemAddedInCart() {
+        SwagLabsPage.getInstance().clickElement("itemCart","xpath");
+        String title = SwagLabsPage.getInstance().getElementText("itemNameInCart","xpath");
+        String validate = sharedState.getSharedData();
+
+        Assert.assertEquals(title,validate);
+    }
+
+    @When("User click on Checkout")
+    public void userClickOnCheckout() {
+        SwagLabsPage.getInstance().clickElement("checkOut","xpath");
+    }
+
+    @Then("User fills checkout details")
+    public void userFillsCheckoutDetails() {
+        SwagLabsPage.getInstance().enterText("firstName","id","Naveen");
+        SwagLabsPage.getInstance().enterText("lastname","id","Kumar");
+        SwagLabsPage.getInstance().enterText("zip","id","641001");
+    }
+
+    @When("User click on Continue")
+    public void userClickOnContinue() {
+        SwagLabsPage.getInstance().clickElement("continue","xpath");
+    }
+
+    @Then("User Verify Item name in checkout page")
+    public void userVerifyItemNameInCheckoutPage() {
+        String title = SwagLabsPage.getInstance().getElementText("itemNameInCart","xpath");
+        String validate = sharedState.getSharedData();
+
+        Assert.assertEquals(title,validate);
+    }
+
+    @When("User click on finish")
+    public void userClickOnFinish() {
+        SwagLabsPage.getInstance().clickElement("finish","xpath");
+    }
+
+    @Then("User verify the confirmation page")
+    public void userVerifyTheConfirmationPage() {
+        String title = SwagLabsPage.getInstance().getElementText("thankYou","xpath");
+        String validate = "THANK YOU FOR YOUR ORDER";
+
+        Assert.assertEquals(title,validate);
+    }
 }

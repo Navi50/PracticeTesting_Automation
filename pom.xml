@@ -80,6 +80,13 @@
       <artifactId>extentreports-cucumber7-adapter</artifactId>
       <version>1.14.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-picocontainer</artifactId>
+      <version>7.20.1</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
     <dependency>
       <groupId>com.aventstack</groupId>
