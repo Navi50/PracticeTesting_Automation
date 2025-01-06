@@ -1,15 +1,27 @@
 {
-  "Loginpage": {
+  "SWAGLABS": {
     "name": {
     "username": "user-name",
     "password": "password"
     },
     "id": {
-    "login": "login-button"
+    "login": "login-button",
+      "firstName": "first-name",
+      "lastname": "last-name",
+      "zip": "postal-code"
     },
     "xpath": {
       "sort": "//*[@class='product_sort_container']",
-      "item1": "/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a"
+      "item1": "/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a",
+      "item1Name": "/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a/div",
+      "itemName": "//*[@class='inventory_details_name']",
+      "addToCard": "//*[contains(text(),'ADD TO CART')]",
+      "itemCart": "//a[@class='shopping_cart_link fa-layers fa-fw']",
+      "itemNameInCart": "//*[@class='inventory_item_name']",
+      "checkOut": "//a[contains(text(),'CHECKOUT')]",
+      "continue": "//*[@value='CONTINUE']",
+      "finish": "//a[contains(text(),'FINISH')]",
+      "thankYou": "//h2[@class='complete-header']"
     }
   }
 }

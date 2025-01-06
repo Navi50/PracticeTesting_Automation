@@ -2,20 +2,15 @@ package utils;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.cucumber.java.AfterStep;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.SwagLoginPage;
+import pages.SwagLabsPage;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -42,7 +37,7 @@ public class CommonUtils {
     }
 
     public void iniWebElements() {
-        PageFactory.initElements(DriverManager.getDriver(), SwagLoginPage.getInstance());
+        PageFactory.initElements(DriverManager.getDriver(), SwagLabsPage.getInstance());
     }
 
 
@@ -85,12 +80,12 @@ public class CommonUtils {
                     wait.until(ExpectedConditions.elementToBeClickable(locator));
 
                 } else if (Objects.equals(eleType,"id")) {
-                    loginLocators = getLocators("Loginpage","id");
+                    loginLocators = getLocators(page,"id");
                     locator = driver.findElement(By.id(loginLocators.get(element)));
                     wait.until(ExpectedConditions.elementToBeClickable(locator));
 
                 } else if (Objects.equals(eleType,"xpath")) {
-                    loginLocators = getLocators("Loginpage","xpath");
+                    loginLocators = getLocators(page,"xpath");
                     locator = driver.findElement(By.xpath(loginLocators.get(element)));
                     wait.until(ExpectedConditions.elementToBeClickable(locator));
                 }
@@ -101,11 +96,11 @@ public class CommonUtils {
                     locator = driver.findElement(By.name(loginLocators.get(element)));
                     wait.until(ExpectedConditions.visibilityOf(locator));
                 } else if (Objects.equals(eleType,"id")) {
-                    loginLocators = getLocators("Loginpage","id");
+                    loginLocators = getLocators(page,"id");
                     locator = driver.findElement(By.id(loginLocators.get(element)));
                     wait.until(ExpectedConditions.visibilityOf(locator));
                 } else if (Objects.equals(eleType,"xpath")) {
-                    loginLocators = getLocators("Loginpage","xpath");
+                    loginLocators = getLocators(page,"xpath");
                     locator = driver.findElement(By.xpath(loginLocators.get(element)));
                     wait.until(ExpectedConditions.visibilityOf(locator));
                 }
@@ -115,10 +110,10 @@ public class CommonUtils {
                     loginLocators = getLocators(page,"name");
                     locator = driver.findElement(By.name(loginLocators.get(element)));
                 } else if (Objects.equals(eleType,"id")) {
-                    loginLocators = getLocators("Loginpage","id");
+                    loginLocators = getLocators(page,"id");
                     locator = driver.findElement(By.id(loginLocators.get(element)));
                 } else if (Objects.equals(eleType,"xpath")) {
-                    loginLocators = getLocators("Loginpage","xpath");
+                    loginLocators = getLocators(page,"xpath");
                     locator = driver.findElement(By.xpath(loginLocators.get(element)));
                 }
 
