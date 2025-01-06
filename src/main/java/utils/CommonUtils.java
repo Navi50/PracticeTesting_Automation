@@ -110,6 +110,17 @@ public class CommonUtils {
                     wait.until(ExpectedConditions.visibilityOf(locator));
                 }
                 break;
+            default:
+                if (Objects.equals(eleType, "name")){
+                    loginLocators = getLocators(page,"name");
+                    locator = driver.findElement(By.name(loginLocators.get(element)));
+                } else if (Objects.equals(eleType,"id")) {
+                    loginLocators = getLocators("Loginpage","id");
+                    locator = driver.findElement(By.id(loginLocators.get(element)));
+                } else if (Objects.equals(eleType,"xpath")) {
+                    loginLocators = getLocators("Loginpage","xpath");
+                    locator = driver.findElement(By.xpath(loginLocators.get(element)));
+                }
 
         }
         return locator;

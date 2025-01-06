@@ -58,37 +58,50 @@ public class ExtentReportsUtil implements ConcurrentEventListener {
 
     public void onTestStepFinished(TestStepFinished event){
         String step = event.getTestStep().getCodeLocation().substring(16);
-        String screenShotPath = takeScreenshot(step);
+        String result = event.getResult().toString();
+//        String screenShotPath = takeScreenshot(step);
+        String base = takess();
         try {
-            if (event.getResult().getStatus().is(Status.FAILED)) {
-
-                scenarioTest.get().createNode(step).addScreenCaptureFromPath(screenShotPath).pass("Step Failed :"+step);
+            if (event.getResult().getStatus().is(Status.PASSED)) {
+                //scenarioTest.get().createNode(step).addScreenCaptureFromPath(screenShotPath).pass("Step Passed: "+step+"\n"+"Result :"+result);
+                scenarioTest.get().createNode(step).addScreenCaptureFromBase64String(base).pass("Step Passed: "+step);
+            } else if (event.getResult().getStatus().is(Status.FAILED)){
+               // scenarioTest.get().createNode(step).addScreenCaptureFromPath(screenShotPath).fail("Step Failed :"+step+"\n"+"Result :"+result);
+                scenarioTest.get().createNode(step).addScreenCaptureFromBase64String(base).fail("Step Failed :"+step+"\n"+"Result :"+result);
 
             } else {
-                scenarioTest.get().createNode(step).addScreenCaptureFromPath(screenShotPath).pass("Step Passed: "+step);
+                //scenarioTest.get().createNode(step).addScreenCaptureFromPath(screenShotPath).info(step+"\n"+"Result :"+result);
+                scenarioTest.get().createNode(step).addScreenCaptureFromBase64String(base).info(step+"\n"+"Result :"+result);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public static String takeScreenshot(String path){
-
+    public static String takess(){
         if (DriverManager.getDriver()==null){
             return null;
         }
-
-        File srcFile = ((TakesScreenshot)DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss"));
-        String screenshotpath = "D:\\Learning\\Reports\\"+path+"_"+time+".png";
-
-        try{
-            FileUtils.copyFile(srcFile, new File(screenshotpath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return screenshotpath;
+        return ((TakesScreenshot)DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
     }
+
+//    public static String takeScreenshot(String path){
+//
+//        if (DriverManager.getDriver()==null){
+//            return null;
+//        }
+//
+//        File srcFile = ((TakesScreenshot)DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
+//        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss"));
+//        String screenshotpath = "D:\\Learning\\Reports\\ScreenShot\\"+path+"_"+time+".png";
+//
+//        try{
+//            FileUtils.copyFile(srcFile, new File(screenshotpath));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return screenshotpath;
+//    }
 
     public void onTestCaseFinished(TestCaseFinished event){
         if (event.getResult().getStatus().is(Status.PASSED)){

@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import utils.CommonUtils;
 
 
@@ -35,5 +36,15 @@ public class SwagLoginPage {
     public void clickLogin(){
         WebElement login = CommonUtils.getElement(page,"id","login","clickable");
         login.click();
+    }
+
+    public void changeSort(String sort){
+        WebElement sortElement = CommonUtils.getElement(page,"xpath","sort","clickable");
+        Select select = new Select(sortElement);
+        select.selectByVisibleText(sort);
+    }
+
+    public void clickOnFirstItem(){
+        CommonUtils.getElement(page,"xpath","item1","nowait").click();
     }
 }
