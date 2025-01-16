@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.SharedState;
 import pages.SwagLabsPage;
+import utils.Constants;
 import utils.DriverManager;
 import utils.ExtentReportsUtil;
 
@@ -23,7 +24,8 @@ public class SwagLabs_Login_Steps {
 
     @Given("Open the login page")
     public void open_the_login_page() throws IOException {
-        ExtentReportsUtil.addLog("\n"+" Open the login page - Successful"+"\n");
+        DriverManager.getDriver().navigate().to(Constants.URL);
+        ExtentReportsUtil.addLog("\n"+" Open the login page - Successful \n");
     }
 
     @When("User enter the Username and Password")
