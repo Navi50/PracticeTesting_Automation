@@ -23,5 +23,15 @@
       "finish": "//a[contains(text(),'FINISH')]",
       "thankYou": "//h2[@class='complete-header']"
     }
+  },
+  "OrangeHRM": {
+    "name": {
+      "username": "username",
+      "password": "password",
+      "login": ""
+    },
+    "xpath": {
+      "login": "//*[@type='submit']"
+    }
   }
 }

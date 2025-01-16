@@ -33,6 +33,7 @@ public class CommonUtils {
         Constants.BROWSER = properties.getProperty("BROWSER");
         Constants.URL = properties.getProperty("URL");
         Constants.APPLICATION = properties.getProperty("APPLICATION");
+        Constants.ORANGEURL = properties.getProperty("ORANGEURL");
 
     }
 
