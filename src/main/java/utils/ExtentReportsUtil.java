@@ -37,8 +37,8 @@ public class ExtentReportsUtil implements ConcurrentEventListener {
         spark.config().setTheme(Theme.STANDARD);
 
         extent.attachReporter(spark);
-        extent.setSystemInfo("Application",application);
-        extent.setSystemInfo("OS","Windows");
+            extent.setSystemInfo("Application",application);
+            extent.setSystemInfo("OS","Windows");
     }
 
     public void onTestRunFinished(TestRunFinished event){
@@ -78,6 +78,7 @@ public class ExtentReportsUtil implements ConcurrentEventListener {
         }
     }
 
+
     public static String takess(){
         if (DriverManager.getDriver()==null){
             return null;
@@ -107,7 +108,7 @@ public class ExtentReportsUtil implements ConcurrentEventListener {
         if (event.getResult().getStatus().is(Status.PASSED)){
             scenarioTest.get().pass(Status.PASSED.toString());
         }else{
-            scenarioTest.get().fail(Status.FAILED.toString());
+            scenarioTest .get().fail(Status.FAILED.toString());
         }
     }
 
