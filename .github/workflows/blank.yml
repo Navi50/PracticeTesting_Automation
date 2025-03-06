@@ -41,8 +41,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2-
 
-      # Run tests using Maven
-      - name: Run tests with Maven
-        run: mvn clean test
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+
+      - name: Run Cucumber Tests
+        run: mvn test 
 
 
