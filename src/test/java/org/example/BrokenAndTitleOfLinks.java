@@ -73,6 +73,7 @@ public class BrokenAndTitleOfLinks {
                 System.out.println("Title of Link: "+title);
             }else{
                 System.out.println("No Title for this link");
+
             }
         }
     }
