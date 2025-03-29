@@ -1,12 +1,14 @@
 package org.example;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class LoginDemo {
 
@@ -27,6 +29,15 @@ public class LoginDemo {
 
         WebElement verifyTitle = driver.findElement(By.className("product_label"));
         verifyTitle.isDisplayed();
+
+        WebElement dd = driver.findElement(By.xpath("//*[@class='product_sort_container']"));
+        Select select = new Select(dd);
+        List<WebElement> options = select.getOptions();
+
+        for(WebElement o : options){
+            System.out.println(o.getText());
+        }
+        
         System.out.println("Title is verified");
 
         driver.navigate().back();
