@@ -2,21 +2,22 @@ package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.sql.DriverManager;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class ScreenShotDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
@@ -35,6 +36,12 @@ public class AppTest {
         password.sendKeys("secret_sauce");
 
         driver.findElement(By.id("login-button")).click();
+
+        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File location = new File("D:\\Learning\\Screenshot\\Screenshot.png");
+        FileUtils.copyFile(file,location);
+        driver.close();
+        driver.quit();
     }
 
 

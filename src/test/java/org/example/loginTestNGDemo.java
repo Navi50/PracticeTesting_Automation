@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -76,21 +79,30 @@ public class loginTestNGDemo {
     public void test() throws InterruptedException {
 
         System.out.println("Test");
-        driver.get("https://www.saucedemo.com/v1/");
+        driver.get("https://www.hyrtutorials.com/p/window-handles-practice.html");
         System.out.println(driver.getTitle());
+        driver.findElement(By.id("newTabBtn")).click();
+        String parent = driver.getWindowHandle();
+        Set<String> all = driver.getWindowHandles();
+        List<String> handles = new ArrayList<>(all);
 
-        driver.findElement(By.name("user-name")).sendKeys("standard_user");
-
-        WebElement passwordElement = driver.findElement(By.id("password"));
-        passwordElement.sendKeys("secret_sauce");
-
-        driver.findElement(By.id("login-button")).click();
-
-        Thread.sleep(2000);
-
-        WebElement verifyTitle = driver.findElement(By.className("product_label"));
-        verifyTitle.isDisplayed();
-        System.out.println("Title is verified");
+        String windowTwo = handles.get(1);
+        driver.switchTo().window(windowTwo);
+        System.out.println(driver.getTitle());
+        driver.switchTo().window(parent);
+        System.out.println(driver.getTitle());
+//        driver.findElement(By.name("user-name")).sendKeys("standard_user");
+//
+//        WebElement passwordElement = driver.findElement(By.id("password"));
+//        passwordElement.sendKeys("secret_sauce");
+//
+//        driver.findElement(By.id("login-button")).click();
+//
+//        Thread.sleep(2000);
+//
+//        WebElement verifyTitle = driver.findElement(By.className("product_label"));
+//        verifyTitle.isDisplayed();
+//        System.out.println("Title is verified");
     }
 }
 

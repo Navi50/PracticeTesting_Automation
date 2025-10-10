@@ -2,7 +2,6 @@ package org.example;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginDemo {
+public class Select_ActionsClass {
 
     public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
@@ -37,7 +36,14 @@ public class LoginDemo {
         for(WebElement o : options){
             System.out.println(o.getText());
         }
-        
+
+        select.selectByValue("za");
+        Thread.sleep(2000);
+        select.selectByVisibleText("Price (low to high)");
+        Thread.sleep(2000);
+        select.selectByIndex(0);
+        Thread.sleep(2000);
+
         System.out.println("Title is verified");
 
         driver.navigate().back();
