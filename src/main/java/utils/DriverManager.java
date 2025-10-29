@@ -9,7 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
-    private static WebDriver driver = null;
+    private static WebDriver driver;
 
     public static void launchDriver(){
         switch (Constants.BROWSER){
