@@ -79,10 +79,15 @@ public class ExtentReportsUtil implements ConcurrentEventListener {
 
 
     public static String takess(){
+        try{
         if (DriverManager.getDriver()==null){
             return null;
         }
         return ((TakesScreenshot)DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 //    public static String takeScreenshot(String path){

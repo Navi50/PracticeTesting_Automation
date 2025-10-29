@@ -67,6 +67,7 @@ public class CommonUtils {
     }
 
     public static WebElement getElement(String page, String eleType, String element, String waitFor){
+        try{
         WebDriver driver = DriverManager.getDriver();
 
         WebElement locator =null;
@@ -120,7 +121,12 @@ public class CommonUtils {
 
         }
         return locator;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
+
 
 
 
