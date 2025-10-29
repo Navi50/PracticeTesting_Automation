@@ -34,7 +34,7 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean maven
+        run: mvn clean install
 
       # Cache Maven dependencies to speed up builds
       - name: Cache Maven dependencies
