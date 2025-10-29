@@ -52,11 +52,11 @@ public class SwagLabsPage {
     public String getElementText(String element, String elementType){
         try{
         WebElement elementText = CommonUtils.getElement(page,elementType,element,"visible");
-        return elementText.getText();
+            return elementText.getText();
         }catch(Exception e){
-            e.printStackTrace();
+            WebElement elementText = CommonUtils.getElement(page,elementType,element,"visible");
+            return elementText.getText();
         }
-        return null;
     }
 
 
