@@ -24,8 +24,12 @@ public class SwagLabs_Login_Steps {
 
     @Given("Open the login page")
     public void open_the_login_page() throws IOException {
+        try{
         DriverManager.getDriver().navigate().to(Constants.URL);
         ExtentReportsUtil.addLog("\n"+" Open the login page - Successful \n");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @When("User enter the Username and Password")

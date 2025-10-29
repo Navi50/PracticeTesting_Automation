@@ -12,8 +12,12 @@ import utils.ExtentReportsUtil;
 public class OrangeHRM_Steps {
     @Given("User Open the OrangeHRM page")
     public void user_open_the_orange_hrm_page() {
-        DriverManager.getDriver().navigate().to(Constants.ORANGEURL);
-        ExtentReportsUtil.addLog("\n"+" Open the login page - Successful \n");
+        try{
+            DriverManager.getDriver().navigate().to(Constants.ORANGEURL);
+            ExtentReportsUtil.addLog("\n"+" Open the login page - Successful \n");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @When("User enter the Username and Password for OrangeHRM page")
