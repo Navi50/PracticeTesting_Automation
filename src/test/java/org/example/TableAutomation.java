@@ -17,7 +17,7 @@ public class TableAutomation {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         System.out.println(driver.getTitle());
 
-//        WebElement table = driver.findElement(By.id("tablepress-demo-premium"));
+//         WebElement table = driver.findElement(By.id("tablepress-demo-premium"));
 //        List<WebElement> rows = table.findElements(By.tagName("tr"));
 //
 //        WebElement cellValue = rows.get(2).findElements(By.tagName("td")).get(2);
